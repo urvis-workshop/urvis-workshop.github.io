@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URVIS Workshop | CVPR 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1222;
+      --panel: rgba(255, 255, 255, 0.04);
+      --muted: #c0c7d6;
+      --text: #f5f7fb;
+      --accent: #57d6ff;
+      --accent-2: #7cf29c;
+      --border: rgba(255, 255, 255, 0.08);
+      --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(124, 242, 156, 0.07), transparent 32%),
+                  radial-gradient(circle at 80% 10%, rgba(87, 214, 255, 0.08), transparent 34%),
+                  radial-gradient(circle at 80% 80%, rgba(87, 214, 255, 0.05), transparent 30%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      position: relative;
+      overflow: hidden;
+      padding: 72px 5vw 56px;
+      background: linear-gradient(140deg, rgba(87, 214, 255, 0.14), rgba(124, 242, 156, 0.12), rgba(11, 18, 34, 0.1));
+      border-bottom: 1px solid var(--border);
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 12% 18% auto;
+      height: 360px;
+      filter: blur(70px);
+      background: radial-gradient(circle, rgba(87, 214, 255, 0.22) 0%, rgba(11, 18, 34, 0) 60%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
+      margin: 0 0 12px;
+      font-size: clamp(32px, 4vw, 48px);
+      letter-spacing: -0.5px;
+    }
+
+    p.lead {
+      margin: 0 0 24px;
+      color: var(--muted);
+      max-width: 720px;
+      font-size: 17px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease;
+    }
+
+    .btn.primary {
+      background: linear-gradient(120deg, #57d6ff, #7cf29c);
+      color: #0b1222;
+      box-shadow: 0 12px 30px rgba(87, 214, 255, 0.35);
+    }
+
+    .btn.secondary {
+      border-color: var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    main {
+      padding: 36px 5vw 64px;
+      display: grid;
+      gap: 32px;
+    }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px 24px 18px;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(6px);
+    }
+
+    section h2 {
+      margin: 0 0 12px;
+      font-family: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
+      font-size: 24px;
+      letter-spacing: -0.2px;
+    }
+
+    section h3 {
+      margin: 16px 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.1px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .stat {
+      padding: 14px 14px 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .stat .label {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .stat .value {
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    ul, ol {
+      padding-left: 18px;
+      margin: 8px 0 12px;
+      color: var(--muted);
+    }
+
+    li { margin-bottom: 6px; }
+
+    .pill-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    th, td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    th { color: var(--text); font-weight: 600; }
+
+    .callout {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(124, 242, 156, 0.08);
+      border: 1px solid rgba(124, 242, 156, 0.2);
+      color: var(--text);
+      margin: 10px 0;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 6px 0 12px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .footnote {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    @media (max-width: 720px) {
+      header { padding: 56px 6vw 44px; }
+      .nav { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .hero-actions { width: 100%; }
+      .btn { width: 100%; text-align: center; }
+      section { padding: 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">URVIS Workshop</div>
+      <nav class="nav-links">
+        <a href="#scope">Scope</a>
+        <a href="#challenges">Challenges</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#committee">Speakers</a>
+        <a href="#organizers">Organizers</a>
+      </nav>
+      <a class="pill" href="https://cvpr.thecvf.com/" target="_blank" rel="noopener noreferrer">CVPR 2026 · Denver</a>
+    </div>
+    <div class="hero">
+      <div>
+        <h1>Unified Robotic Vision with Cross-Modal Sensing and Alignment</h1>
+        <p class="lead">
+          URVIS bridging computer vision, robotics, and multimodal learning to build unified perception across RGB, depth, LiDAR, event cameras, audio, and tactile sensing.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="mailto:zongwei.wu@uni-wuerzburg.de">Contact the Organizers</a>
+          <a class="btn secondary" href="#scope">Explore the Program</a>
+        </div>
+      </div>
+      <div class="grid"></div>
+    </div>
+  </header>
+
+  <main>
+    <section id="scope">
+      <h2>Workshop Scope</h2>
+      <p>
+        URVIS investigates how unified perception can emerge from heterogeneous sensing. We explore architectures and training strategies that allow modalities to guide, compensate, or regularize one another under partial or missing signals.
+      </p>
+      <div class="grid">
+        <div class="stat">
+          <div class="label">Semantic Consistency</div>
+          <div class="value">Aligned cross-modal features</div>
+          <p class="footnote">RGB, depth, LiDAR, event, audio, tactile cues.</p>
+        </div>
+        <div class="stat">
+          <div class="label">Unified Design</div>
+          <div class="value">Sensor-aware models</div>
+          <p class="footnote">Dynamic weighting by reliability and context.</p>
+        </div>
+        <div class="stat">
+          <div class="label">Scaling Behavior</div>
+          <div class="value">Quality vs. quantity</div>
+          <p class="footnote">Few calibrated sensors vs. many redundant ones.</p>
+        </div>
+        <div class="stat">
+          <div class="label">Cross-Modal Guidance</div>
+          <div class="value">Fill gaps gracefully</div>
+          <p class="footnote">Inference under dropouts, occlusions, or async data.</p>
+        </div>
+      </div>
+      <div class="callout">
+        Core challenge: learning under missing or partial modalities while retaining robustness, interpretability, and efficiency for real-world deployment.
+      </div>
+    </section>
+
+    <section id="challenges">
+      <h2>Challenges</h2>
+      <div class="two-col">
+        <div>
+          <h3>Urban Scene Segmentation</h3>
+          <p class="footnote">
+            Multisensory (RGB, LiDAR, radar, event, IMU/GNSS) segmentation under clear and adverse conditions using MUSIC-based data; tests on unreleased samples.
+          </p>
+          <ul>
+            <li>Semantic, panoptic, and uncertainty-aware segmentation.</li>
+            <li>Degradation when sensors vanish; fusion under weather shifts.</li>
+            <li>Model size vs. robustness trade-offs.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Object Tracking in the Real World</h3>
+          <p class="footnote">
+            Train with partially paired modalities; deploy with full or missing sets. Focus on modality-agnostic representations and calibration-light fusion.
+          </p>
+          <ul>
+            <li>Resilient to sensor dropouts and new sensor combinations.</li>
+            <li>Efficient training under limited paired data.</li>
+            <li>Evaluation on unreleased, newly collected samples.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Egocentric Multisensory Actions</h3>
+          <p class="footnote">
+            Daily-activity understanding for wearable, humanoid, and assistive robotics with multisensory signals (RGB plus tactile, audio, motion).
+          </p>
+          <ul>
+            <li>Cross-modal temporal alignment and fusion.</li>
+            <li>Robustness to missing or noisy modalities.</li>
+            <li>New multisensor dataset under collection for evaluation.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="schedule">
+      <h2>Schedule</h2>
+      <table aria-label="Workshop schedule">
+        <thead>
+          <tr><th>Time</th><th>Event</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>08:30</td><td>Welcome and Opening Remarks</td></tr>
+          <tr><td>08:40</td><td>Challenge Report 1</td></tr>
+          <tr><td>08:50</td><td>Challenge Report 2</td></tr>
+          <tr><td>09:00</td><td>Invited Talk 1</td></tr>
+          <tr><td>09:30</td><td>Invited Talk 2</td></tr>
+          <tr><td>10:00</td><td>Coffee Break</td></tr>
+          <tr><td>10:30</td><td>Oral Presentation 1</td></tr>
+          <tr><td>10:40</td><td>Oral Presentation 2</td></tr>
+          <tr><td>10:50</td><td>Challenge Report 3</td></tr>
+          <tr><td>11:00</td><td>Invited Talk 3</td></tr>
+          <tr><td>11:30</td><td>Invited Talk 4</td></tr>
+          <tr><td>12:00</td><td>Awards and Closing Remarks</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+
+    <section id="committee">
+      <h2>Speakers</h2>
+      <div class="organizers-grid">
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/ranjay-krishna.jpg" alt="Ranjay Krishna">
+          <div class="organizer-name">Ranjay Krishna</div>
+          <div class="organizer-affiliation">University of Washington &amp; AI2</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/hilde-kuehne.jpg" alt="Hilde Kuehne">
+          <div class="organizer-name">Hilde Kuehne</div>
+          <div class="organizer-affiliation">University of Tuebingen</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/felix-heide.jpg" alt="Felix Heide">
+          <div class="organizer-name">Felix Heide</div>
+          <div class="organizer-affiliation">Princeton</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/cornelia-fermuller.jpg" alt="Cornelia Fermuller">
+          <div class="organizer-name">Cornelia Fermuller</div>
+          <div class="organizer-affiliation">University of Maryland</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="organizers">
+      <h2>Organizers</h2>
+      <style>
+        .organizers-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+          gap: 24px;
+          margin-top: 20px;
+        }
+        #committee .organizers-grid {
+          grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+          justify-content: center;
+        }
+        #organizers .organizers-grid {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .organizer-card {
+          text-align: center;
+          padding: 12px;
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid var(--border);
+        }
+        #organizers .organizer-card {
+          flex: 1 1 180px;
+          max-width: 220px;
+          min-width: 140px;
+        }
+        .organizer-photo {
+          width: 100%;
+          height: 140px;
+          border-radius: 12px;
+          object-fit: cover;
+          margin-bottom: 12px;
+          border: 1px solid var(--border);
+        }
+        #committee .organizer-photo {
+          height: 160px;
+        }
+        .organizer-name {
+          font-weight: 600;
+          color: var(--text);
+          font-size: 14px;
+          margin-bottom: 4px;
+        }
+        .organizer-affiliation {
+          font-size: 12px;
+          color: var(--muted);
+          line-height: 1.4;
+        }
+      </style>
+      <div class="organizers-grid">
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/zongwei-wu.png" alt="Zongwei Wu">
+          <div class="organizer-name">Zongwei Wu</div>
+          <div class="organizer-affiliation">University of Würzburg</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/christos-sakaridis.png" alt="Christos Sakaridis">
+          <div class="organizer-name">Christos Sakaridis</div>
+          <div class="organizer-affiliation">ETH Zurich</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/ilya-chugunov.png" alt="Ilya Chugunov">
+          <div class="organizer-name">Ilya Chugunov</div>
+          <div class="organizer-affiliation">Adobe Inc</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/zhuyun-zhou.png" alt="Zhuyun Zhou">
+          <div class="organizer-name">Zhuyun Zhou</div>
+          <div class="organizer-affiliation">University of Würzburg</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/yuedong-tan.jpg" alt="Yuedong Tan">
+          <div class="organizer-name">Yuedong Tan</div>
+          <div class="organizer-affiliation">University of Würzburg &amp; INSAIT</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/tim-broedermann.png" alt="Tim Broedermann">
+          <div class="organizer-name">Tim Broedermann</div>
+          <div class="organizer-affiliation">ETH Zurich</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/min-liu.png" alt="Min Liu">
+          <div class="organizer-name">Min Liu</div>
+          <div class="organizer-affiliation">DVSense</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/jean-mercat.png" alt="Jean Mercat">
+          <div class="organizer-name">Jean Mercat</div>
+          <div class="organizer-affiliation">Inria</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/xavier-alameda-pineda.png" alt="Xavier Alameda-Pineda">
+          <div class="organizer-name">Xavier Alameda-Pineda</div>
+          <div class="organizer-affiliation">Inria</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/chao-ma.png" alt="Chao Ma">
+          <div class="organizer-name">Chao Ma</div>
+          <div class="organizer-affiliation">Shanghai Jiao Tong University</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/tobi-delbruck.jpg" alt="Tobi Delbruck">
+          <div class="organizer-name">Tobi Delbruck</div>
+          <div class="organizer-affiliation">University of Zurich &amp; ETH Zurich</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/luc-van-gool.jpeg" alt="Luc Van Gool">
+          <div class="organizer-name">Luc Van Gool</div>
+          <div class="organizer-affiliation">INSAIT</div>
+        </div>
+        <div class="organizer-card">
+          <img class="organizer-photo" src="images/radu-timofte.png" alt="Radu Timofte">
+          <div class="organizer-name">Radu Timofte</div>
+          <div class="organizer-affiliation">University of Würzburg</div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="special-issue">
+      <h2>Special Issue</h2>
+      <p>Extended submissions will be invited to an Elsevier <em>Computer Vision and Image Understanding (CVIU)</em> special issue.</p>
+    </section>
+
+
+  </main>
+</body>
+</html>
