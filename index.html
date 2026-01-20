@@ -289,6 +289,53 @@
       gap: 16px;
     }
 
+    .challenge-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+    }
+
+    .challenge-card {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      text-decoration: none;
+      color: var(--text);
+      aspect-ratio: 1 / 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .challenge-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(87, 214, 255, 0.4);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+    }
+
+    .challenge-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: -0.1px;
+    }
+
+    .challenge-card p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .challenge-link {
+      margin-top: 10px;
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     .footnote {
       font-size: 13px;
       color: var(--muted);
@@ -321,6 +368,7 @@
       .hero-actions { width: 100%; }
       .btn { width: 100%; text-align: center; }
       section { padding: 18px 16px; }
+      .challenge-card { aspect-ratio: auto; }
       #organizers .organizers-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -404,40 +452,28 @@
 
     <section id="challenges">
       <h2>Challenges</h2>
-      <div class="two-col">
-        <div>
-          <h3>Urban Scene Segmentation</h3>
-          <p class="footnote">
-            Multisensory (RGB, LiDAR, radar, event, IMU/GNSS) segmentation under clear and adverse conditions using MUSIC-based data; tests on unreleased samples.
-          </p>
-          <ul>
-            <li>Semantic, panoptic, and uncertainty-aware segmentation.</li>
-            <li>Degradation when sensors vanish; fusion under weather shifts.</li>
-            <li>Model size vs. robustness trade-offs.</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Object Tracking in the Real World</h3>
-          <p class="footnote">
-            Train with partially paired modalities; deploy with full or missing sets. Focus on modality-agnostic representations and calibration-light fusion.
-          </p>
-          <ul>
-            <li>Resilient to sensor dropouts and new sensor combinations.</li>
-            <li>Efficient training under limited paired data.</li>
-            <li>Evaluation on unreleased, newly collected samples.</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Egocentric Multisensory Actions</h3>
-          <p class="footnote">
-            Daily-activity understanding for wearable, humanoid, and assistive robotics with multisensory signals (RGB plus tactile, audio, motion).
-          </p>
-          <ul>
-            <li>Cross-modal temporal alignment and fusion.</li>
-            <li>Robustness to missing or noisy modalities.</li>
-            <li>New multisensor dataset under collection for evaluation.</li>
-          </ul>
-        </div>
+      <div class="challenge-cards">
+        <a class="challenge-card" href="challenge-urban-scene.html">
+          <div>
+            <h3>Urban Scene Segmentation</h3>
+            <p>Multisensory segmentation under clear and adverse conditions using MUSIC-based data.</p>
+          </div>
+          <span class="challenge-link">View details →</span>
+        </a>
+        <a class="challenge-card" href="challenge-object-tracking.html">
+          <div>
+            <h3>Object Tracking in the Real World</h3>
+            <p>Train with partial pairing; deploy with full or missing modalities.</p>
+          </div>
+          <span class="challenge-link">View details →</span>
+        </a>
+        <a class="challenge-card" href="challenge-egocentric-actions.html">
+          <div>
+            <h3>Egocentric Multisensory Actions</h3>
+            <p>Daily-activity understanding with RGB, tactile, audio, and motion.</p>
+          </div>
+          <span class="challenge-link">View details →</span>
+        </a>
       </div>
     </section>
 

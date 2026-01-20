@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Scene Segmentation | URVIS Workshop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1222;
+      --panel: rgba(255, 255, 255, 0.04);
+      --muted: #c0c7d6;
+      --text: #f5f7fb;
+      --accent: #57d6ff;
+      --border: rgba(255, 255, 255, 0.08);
+      --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(124, 242, 156, 0.07), transparent 32%),
+                  radial-gradient(circle at 80% 10%, rgba(87, 214, 255, 0.08), transparent 34%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 48px 5vw 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .back {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 16px 0 12px;
+      font-family: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0;
+    }
+
+    main {
+      padding: 24px 5vw 64px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-family: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .organizers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .organizer {
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .organizer .name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .organizer .affiliation {
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a class="back" href="index.html#challenges">← Back to challenges</a>
+      <h1>Urban Scene Segmentation</h1>
+      <p class="lead">
+        Multisensory (RGB, LiDAR, radar, event, IMU/GNSS) segmentation under clear and adverse conditions using MUSIC-based data.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="card">
+        <h2>Challenge Details</h2>
+        <ul>
+          <li>Semantic, panoptic, and uncertainty-aware segmentation tasks.</li>
+          <li>Evaluation includes unreleased samples to test generalization.</li>
+          <li>Robustness to sensor dropouts and weather-driven shifts.</li>
+          <li>Analyze model size versus robustness trade-offs.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Organizers</h2>
+        <div class="organizers">
+          <div class="organizer">
+            <div class="name">Organizer A</div>
+            <div class="affiliation">Affiliation TBD</div>
+          </div>
+          <div class="organizer">
+            <div class="name">Organizer B</div>
+            <div class="affiliation">Affiliation TBD</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
