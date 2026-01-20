@@ -54,6 +54,12 @@
       pointer-events: none;
     }
 
+    .header-inner,
+    .main-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
     .nav {
       display: flex;
       justify-content: space-between;
@@ -161,6 +167,9 @@
 
     main {
       padding: 36px 5vw 64px;
+    }
+
+    .main-inner {
       display: grid;
       gap: 32px;
     }
@@ -286,44 +295,68 @@
       margin-top: 12px;
     }
 
+    @media (max-width: 960px) {
+      header { padding: 64px 6vw 52px; }
+      header::after { inset: 10% 10% auto; height: 300px; }
+      p.lead { font-size: 16px; }
+    }
+
     @media (max-width: 720px) {
       header { padding: 56px 6vw 44px; }
       .nav { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .nav-links { gap: 12px; font-size: 13px; }
       .hero-actions { width: 100%; }
       .btn { width: 100%; text-align: center; }
       section { padding: 18px 16px; }
+      #organizers .organizers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+      #organizers .organizer-card { max-width: none; }
+      table { display: block; overflow-x: auto; }
+      th, td { white-space: nowrap; }
+    }
+
+    @media (max-width: 520px) {
+      header { padding: 48px 7vw 40px; }
+      h1 { font-size: clamp(28px, 8vw, 36px); }
+      section h2 { font-size: 22px; }
+      .organizer-photo { height: 120px; }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="nav">
-      <div class="brand">URVIS Workshop</div>
-      <nav class="nav-links">
-        <a href="#scope">Scope</a>
-        <a href="#challenges">Challenges</a>
-        <a href="#schedule">Schedule</a>
-        <a href="#committee">Speakers</a>
-        <a href="#organizers">Organizers</a>
-      </nav>
-      <a class="pill" href="https://cvpr.thecvf.com/" target="_blank" rel="noopener noreferrer">CVPR 2026 · Denver</a>
-    </div>
-    <div class="hero">
-      <div>
-        <h1>Unified Robotic Vision with Cross-Modal Sensing and Alignment</h1>
-        <p class="lead">
-          URVIS bridging computer vision, robotics, and multimodal learning to build unified perception across RGB, depth, LiDAR, event cameras, audio, and tactile sensing.
-        </p>
-        <div class="hero-actions">
-          <a class="btn primary" href="mailto:zongwei.wu@uni-wuerzburg.de">Contact the Organizers</a>
-          <a class="btn secondary" href="#scope">Explore the Program</a>
-        </div>
+    <div class="header-inner">
+      <div class="nav">
+        <div class="brand">URVIS Workshop</div>
+        <nav class="nav-links">
+          <a href="#scope">Scope</a>
+          <a href="#challenges">Challenges</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#committee">Speakers</a>
+          <a href="#organizers">Organizers</a>
+        </nav>
+        <a class="pill" href="https://cvpr.thecvf.com/" target="_blank" rel="noopener noreferrer">CVPR 2026 · Denver</a>
       </div>
-      <div class="grid"></div>
+      <div class="hero">
+        <div>
+          <h1>Unified Robotic Vision with Cross-Modal Sensing and Alignment</h1>
+          <p class="lead">
+            URVIS bridging computer vision, robotics, and multimodal learning to build unified perception across RGB, depth, LiDAR, event cameras, audio, and tactile sensing.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="mailto:zongwei.wu@uni-wuerzburg.de">Contact the Organizers</a>
+            <a class="btn secondary" href="#scope">Explore the Program</a>
+          </div>
+        </div>
+        <div class="grid"></div>
+      </div>
     </div>
   </header>
 
   <main>
+    <div class="main-inner">
     <section id="scope">
       <h2>Workshop Scope</h2>
       <p>
@@ -573,7 +606,7 @@
       <p>Extended submissions will be invited to an Elsevier <em>Computer Vision and Image Understanding (CVIU)</em> special issue.</p>
     </section>
 
-
+    </div>
   </main>
 </body>
 </html>
