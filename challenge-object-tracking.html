@@ -88,12 +88,26 @@
       gap: 12px;
     }
 
+    .organizer-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .organizer-link:hover .organizer,
+    .organizer-link:focus-visible .organizer {
+      border-color: rgba(87, 214, 255, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      transform: translateY(-1px);
+    }
+
     .organizer {
       padding: 14px;
       border-radius: 14px;
       border: 1px solid var(--border);
       background: rgba(255, 255, 255, 0.02);
       text-align: center;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .organizer-photo {
@@ -144,16 +158,20 @@
       <div class="card">
         <h2>Organizers</h2>
         <div class="organizers">
-          <div class="organizer">
-            <img class="organizer-photo" src="challenge-2/Andong Lu (Anhui University).jpg" alt="Andong Lu">
-            <div class="name">Andong Lu</div>
-            <div class="affiliation">Anhui University</div>
-          </div>
-          <div class="organizer">
-            <img class="organizer-photo" src="challenge-2/Chenglong Li (Anhui University).jpg" alt="Chenglong Li">
-            <div class="name">Chenglong Li</div>
-            <div class="affiliation">Anhui University</div>
-          </div>
+          <a class="organizer-link" href="https://scholar.google.com/scholar?q=Andong%20Lu" target="_blank" rel="noopener noreferrer">
+            <div class="organizer">
+              <img class="organizer-photo" src="challenge-2/Andong Lu (Anhui University).jpg" alt="Andong Lu">
+              <div class="name">Andong Lu</div>
+              <div class="affiliation">Anhui University</div>
+            </div>
+          </a>
+          <a class="organizer-link" href="https://scholar.google.com/scholar?q=Chenglong%20Li" target="_blank" rel="noopener noreferrer">
+            <div class="organizer">
+              <img class="organizer-photo" src="challenge-2/Chenglong Li (Anhui University).jpg" alt="Chenglong Li">
+              <div class="name">Chenglong Li</div>
+              <div class="affiliation">Anhui University</div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
