@@ -363,6 +363,34 @@
       margin-top: 12px;
     }
 
+    .sponsor-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .sponsor-logo {
+      padding: 16px 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.9);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+    }
+
+    .sponsor-logo img {
+      width: 160px;
+      max-width: 100%;
+      height: 60px;
+      object-fit: contain;
+      filter: none;
+    }
+
     footer {
       padding: 24px 5vw 40px;
       color: var(--muted);
@@ -755,6 +783,13 @@
           </a>
         </div>
         <div class="organizer-card">
+          <a href="https://jinyeying.github.io/" target="_blank" rel="noopener noreferrer">
+            <img class="organizer-photo" src="images/yeying-jing.jpg" alt="Yeying Jin" style="object-position: center 1%;">
+            <div class="organizer-name">Yeying Jin</div>
+            <div class="organizer-affiliation">Tencent</div>
+          </a>
+        </div>
+        <div class="organizer-card">
           <a href="https://scholar.google.com/scholar?q=Tobi%20Delbruck" target="_blank" rel="noopener noreferrer">
             <img class="organizer-photo" src="images/tobi-delbruck.jpg" alt="Tobi Delbruck">
             <div class="organizer-name">Tobi Delbruck</div>
@@ -778,6 +813,17 @@
       </div>
     </section>
 
+    <section id="sponsors">
+      <h2>Sponsors</h2>
+      <div class="sponsor-logos">
+        <div class="sponsor-logo">
+          <img src="images/tencent.png" alt="Tencent logo">
+        </div>
+        <div class="sponsor-logo">
+          <img src="images/wurzburg.png" alt="University of Würzburg logo">
+        </div>
+      </div>
+    </section>
 
     <section id="special-issue">
       <h2>Special Issue</h2>
