@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object Tracking in the Real World | URVIS Workshop</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1222;
+      --panel: rgba(255, 255, 255, 0.04);
+      --muted: #c0c7d6;
+      --text: #f5f7fb;
+      --accent: #57d6ff;
+      --border: rgba(255, 255, 255, 0.08);
+      --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(124, 242, 156, 0.07), transparent 32%),
+        radial-gradient(circle at 80% 10%, rgba(87, 214, 255, 0.08), transparent 34%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 48px 5vw 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .back {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 16px 0 12px;
+      font-family: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0;
+    }
+
+    main {
+      padding: 24px 5vw 64px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-family: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .organizers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .organizer-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .organizer-link:hover .organizer,
+    .organizer-link:focus-visible .organizer {
+      border-color: rgba(87, 214, 255, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .organizer {
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      text-align: center;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .organizer-photo {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      object-fit: contain;
+      object-position: center top;
+      border: 1px solid var(--border);
+      background: #0f1628;
+      margin-bottom: 10px;
+    }
+
+    .organizer .name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .organizer .affiliation {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .deadline-note {
+      background: rgba(87, 214, 255, 0.08);
+      /* accent light */
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+
+    /* --- Callouts / Encadrés --- */
+    .callout {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 12px 0;
+      box-shadow: var(--card-shadow);
+    }
+
+    .callout .title {
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .callout.info {
+      border-left-color: var(--accent);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <a class="back" href="index.html#challenges">← Back to challenges</a>
+      <h1>URVIS 2026 Challenge 2: MUSES-AXPS — Adverse-to-eXtreme Panoptic Segmentation</h1>
+      <p class="lead">
+        Multisensory (RGB, LiDAR, radar, event, IMU/GNSS) segmentation under clear and adverse conditions using
+        <a href="https://github.com/timbroed/MUSES" target="_blank" rel="noopener noreferrer"
+          style="color: var(--accent); text-decoration: underline;">MUSES-based data</a>.
+        <br>
+        The challenge is available on Codabench:
+        <a href="https://www.codabench.org/competitions/13395/" target="_blank" rel="noopener noreferrer"
+          style="color: var(--accent); text-decoration: underline;">https://codabench.org/competitions/13395/</a>
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="card">
+        <h2>Challenge objectives</h2>
+        <ul>
+          <li>Panoptic segmentation tasks under clear and adverse conditions.</li>
+          <li>Evaluation on a Official Score emphasizing robustness and generalization.</li>
+          <li>Availability of 4 different sensor modalities (RGB, LiDAR, Radar, Event).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Introduction</h2>
+        <p>
+          Current perception pipelines for automated driving deliver strong performance in clear-weather
+          conditions,
+          yet they still struggle under adverse-to-extreme scenarios. This challenge targets
+          <strong>panoptic segmentation</strong> on the <strong>MUSES</strong> multi-sensor dataset across
+          clear and adverse-to-extreme conditions (rain, fog, snow; day &amp; night).
+        </p>
+
+        <div class="callout info">
+          <div class="title">Why Robustness Matters</div>
+          <p style="margin:0">
+            Leveraging multiple sensors is crucial for reliable perception in autonomous driving, as each
+            modality
+            offers complementary strengths and weaknesses.
+          </p>
+        </div>
+      </div>
+
+
+
+      <div class="card">
+        <h2>Dataset Description</h2>
+
+        <p>
+          The challenge is based on
+          <a href="https://github.com/timbroed/MUSES" target="_blank" rel="noopener noreferrer"
+          style="color: var(--accent); text-decoration: underline;">MUSES</a>,
+          a <span style="font-weight:700; color:var(--accent);">multi-sensor dataset</span> designed for dense
+          2D
+          panoptic segmentation under varying levels of uncertainty. It provides synchronized recordings from
+          several
+          complementary modalities, including an RGB frame camera, a lidar, a radar, an event camera, and
+          GNSS/IMU signals. This combination enables studying robust fusion strategies and understanding how
+          different sensors compensate for each other under difficult conditions.
+        </p>
+
+        <p>
+          MUSES covers a wide range of
+          <span style="font-weight:700; color:var(--accent);">environmental conditions</span>, including clear
+          weather,
+          rain, fog, and snow, as well as both daytime and nighttime scenes. While clear-weather data is
+          included, the official scoring system focuses primarily on
+          <span style="font-weight:700; color:var(--accent);">adverse-to-extreme</span> situations,
+          reflecting the need for resilient perception in real-world autonomous driving scenarios.
+        </p>
+
+        <p>
+          The dataset is organized into multiple directories—frame camera, lidar, radar, event camera,
+          panoptic ground truth, calibration files, reference frames, and more. During the
+          <span style="font-weight:700; color:var(--accent);">Validation Phase</span>,
+          input data is fully available while ground truth may be partially released, whereas in the
+          <span style="font-weight:700; color:var(--accent);">Test Phase</span>
+          all labels are hidden and performance is assessed through the submission interface.
+        </p>
+
+        <p>
+          Additional details—file specifications, complete directory structure, download instructions, and
+          dataset statistics—can be found on the Codabench challenge page:
+          <a href="https://www.codabench.org/competitions/13395/" target="_blank" rel="noopener noreferrer"
+            style="color: var(--accent); text-decoration: underline;">https://codabench.org/competitions/13395/</a>
+        </p>
+      </div>
+
+
+
+      <div class="card">
+        <h2>Evaluation Metrics</h2>
+
+        <p>
+          We introduce a new <span style="font-weight:700; color:var(--accent);">Official Score</span>
+          designed to reward models that perform strongly under
+          <span style="font-weight:700; color:var(--accent);">adverse-weather conditions</span> while still
+          maintaining competitive accuracy in clear scenarios.
+          To support this, we extend the standard PQ, RQ, and SQ metrics into their weather-aware counterparts
+          —
+          <span style="font-weight:700; color:var(--accent);">wPQ</span>,
+          <span style="font-weight:700; color:var(--accent);">wRQ</span>,
+          <span style="font-weight:700; color:var(--accent);">wSQ</span>
+          — each emphasizing performance in challenging situations.
+          These metrics weight adverse-weather samples more heavily to better reflect real-world robustness.
+          The final ranking on the leaderboard is determined exclusively by the wPQ score.
+        </p>
+
+      </div>
+
+      <div class="card">
+        <h2>Challenge Deadlines</h2>
+
+        <h3 style="margin-bottom:2px;">Phase 1 — Validation</h3>
+        <p style="color:var(--muted); margin:0 0 6px;">February 6 - March 10, 2026</p>
+        <p style="margin-top:0;">
+          Training and validation data is released. The validation server becomes active.
+        </p>
+
+        <h3 style="margin-bottom:2px;">Phase 2 — Test</h3>
+        <p style="color:var(--muted); margin:0 0 6px;">March 1-10, 2026</p>
+        <p style="margin-top:0;">
+          Participants run their final models on the public test data.
+          Only <strong>three submissions</strong> are allowed.
+        </p>
+
+        <h3 style="margin-bottom:2px;">Phase 3 — Material Submission (Optional)</h3>
+        <p style="color:var(--muted); margin:0 0 6px;">April 10, 2026</p>
+        <p style="margin-top:0;">
+          Teams submit fact sheets and reproducibility code.
+        </p>
+
+        <h3 style="margin-bottom:2px;">Phase 4 — Paper Submission</h3>
+        <p style="color:var(--muted); margin:0 0 6px;">April 10, 2026</p>
+        <p style="margin-top:0;">
+          Teams submit papers describing their approaches to URVIS 2026.
+        </p>
+        <div class="deadline-note">
+          <strong>Note:</strong> Our submission and final leaderboard deadlines are aligned with the
+          official publication schedule of the target conference.
+
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Organizers</h2>
+        <div class="organizers">
+          <a class="organizer-link" target="_blank" rel="noopener noreferrer">
+            <div class="organizer">
+              <img class="organizer-photo" src="images/jocelyn_wang.png" alt="Jocelyn Wang">
+              <div class="name">Jocelyn Wang</div>
+              <div class="affiliation">ETH Zurich</div>
+            </div>
+          </a>
+          <a class="organizer-link" target="_blank" rel="noopener noreferrer">
+            <div class="organizer">
+              <img class="organizer-photo" src="images/nolwenn-peyratout.jpg" alt="Nolwenn Peyratout">
+              <div class="name">Peyratout Nolwenn </div>
+              <div class="affiliation">I3S - Université Côte d'Azur</div>
+            </div>
+          </a>
+          <a class="organizer-link" href="https://scholar.google.com/scholar?q=Tim%20Broedermann" target="_blank"
+            rel="noopener noreferrer">
+            <div class="organizer">
+              <img class="organizer-photo" src="images/tim-broedermann.png" alt="Tim Broedermann">
+              <div class="name">Broedermann Tim</div>
+              <div class="affiliation">ETH Zurich</div>
+            </div>
+          </a>
+          <a class="organizer-link" href="https://scholar.google.com/scholar?q=Zongwei%20Wu" target="_blank"
+            rel="noopener noreferrer">
+            <div class="organizer">
+              <img class="organizer-photo" src="images/zongwei-wu.png" alt="Zongwei Wu">
+              <div class="name">Zongwei Wu</div>
+              <div class="affiliation">University of Würzburg</div>
+            </div>
+          </a>
+          <a class="organizer-link" href="https://scholar.google.com/scholar?q=Christos%20Sakaridis" target="_blank"
+            rel="noopener noreferrer">
+            <div class="organizer">
+              <img class="organizer-photo" src="images/christos-sakaridis.png" alt="Christos Sakaridis">
+              <div class="name">Christos Sakaridis</div>
+              <div class="affiliation">ETH Zurich</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
