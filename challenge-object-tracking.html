@@ -130,6 +130,18 @@
       color: var(--muted);
       font-size: 13px;
     }
+
+    .deadline-note {
+      background: rgba(87, 214, 255, 0.08);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
   </style>
 </head>
 <body>
@@ -146,13 +158,82 @@
   <main>
     <div class="container">
       <div class="card">
-        <h2>Challenge Details</h2>
+        <h2>Challenge objectives</h2>
         <ul>
-          <li>Track objects with missing or newly combined sensor modalities.</li>
-          <li>Efficient training under limited paired data constraints.</li>
-          <li>Calibration-light fusion and modality-agnostic features.</li>
-          <li>Evaluation on unreleased, newly collected samples.</li>
+          <li>Conducting RGBT object tracking under different modality-missing conditions.</li>
+          <li>Evaluation is conducted using the official scoring protocol, which emphasizes tracker performance under both normal and modality-missing conditions.</li>
         </ul>
+      </div>
+
+      <div class="card">
+        <h2>Introduction</h2>
+        <p>
+          Existing RGBT tracking methods are predominantly developed and evaluated under the assumption that both RGB
+          and thermal modalities are always available and complete. However, this assumption is often violated in
+          real-world applications. In practical deployments, sensors may suffer from temporary failures, transmission
+          interruptions, environmental interference, or hardware degradation, leading to partial or complete absence
+          of one modality. This challenge specifically focuses on modality missing rather than general degradation,
+          aiming to expose the limitations of current RGBT tracking methods that rely heavily on complete RGBT inputs.
+          By systematically simulating modality-missing conditions, the benchmark assesses a tracker's robustness,
+          adaptability, and capability to maintain stable target localization when one modality is unavailable.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Dataset Description</h2>
+        <p>
+          This challenge addresses RGBT tracking in real-world scenarios with prevalent modality-missing conditions.
+          We construct a new modality-missing tracking test dataset based on ground and aerial platforms, comprising a
+          total of 90 modality-missing tracking sequences. Among these, 60 sequences are used for the first phase of
+          public evaluation, while the remaining 30 sequences are reserved for the second phase of testing (all
+          sequences will be made publicly available after the workshop).
+        </p>
+        <p>
+          Specifically, the entire dataset contains targets from 14 object categories, comprising a total of 37,385
+          frames, with a maximum sequence length of 2,977 frames and an average sequence length of 415.4 frames. In
+          addition, the dataset includes five missing-modality patterns: random_missing, long_term_missing,
+          swap_missing, long_term_and_random_missing, and swap_and_random_missing. For detailed definitions of these
+          missing patterns, please refer to the paper "Modality-missing RGBT Tracking: Invertible Prompt Learning and
+          High-quality Benchmarks".
+        </p>
+        <p>
+          For more details on dataset usage and evaluation protocols, please visit:
+          <a href="https://www.codabench.org/competitions/13582/" target="_blank" rel="noopener noreferrer"
+            style="color: var(--accent); text-decoration: underline;">https://www.codabench.org/competitions/13582/</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Evaluation Metrics</h2>
+        <p>
+          We introduce a new evaluation score to assess tracker performance under missing-modality scenarios. We adopt
+          Precision Rate (PR) and Success Rate (SR) as the primary evaluation metrics. The final score is jointly
+          determined by the PRt and SRt over the complete sequences, as well as the PRm and SRm under modality-missing
+          scenarios.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Challenge Deadlines</h2>
+        <h3 style="margin-bottom:2px;">Phase 1 - Validation Phase</h3>
+        <p style="color:var(--muted); margin:0 0 6px;">February 1 - March 3, 2026</p>
+        <p style="margin-top:0;">
+          Training and validation data will be released, validation server will be active.
+        </p>
+
+        <h3 style="margin-bottom:2px;">Phase 2 - Test Phase</h3>
+        <p style="color:var(--muted); margin:0 0 6px;">March 4 - March 10, 2026</p>
+        <p style="margin-top:0;">
+          Participants are required to submit the model, code, and a description of the solution for the organizers to
+          conduct testing on unpublished data, in order to determine the final ranking.
+        </p>
+
+        <h3 style="margin-bottom:2px;">Phase 3 - Paper Submission Phase</h3>
+        <p style="color:var(--muted); margin:0 0 6px;">March 12 - March 30, 2026</p>
+        <p style="margin-top:0;">
+          The top-ranking participants will be invited for co-authoring the challenge report. Please note that all the
+          teams have full freedom to decide whether they also wish to submit a separate full workshop paper.
+        </p>
       </div>
 
       <div class="card">
